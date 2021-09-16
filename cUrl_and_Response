@@ -1,0 +1,61 @@
+To register a farmer->
+
+
+curl --location --request POST 'http://localhost:8080/water/user' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name":"Rubicon"
+}'
+
+Response
+{
+    "id": "b17a58a0-feb6-4f47-827e-c9a658737af5",
+    "name": "Rubicon"
+}
+
+
+
+Place a new Order
+
+curl --location --request POST 'http://localhost:8080/order/new' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "startTime":"2021-09-16 11:05:00",
+    "duration":"00:30:01",
+    "waterOrder":"b17a58a0-feb6-4f47-827e-c9a658737af5"
+}
+
+Response
+{
+    "id": "cfd8da6e-aac2-4e31-afa6-c1d5c0ded7f5",
+    "startTime": "2021-09-16 11:05:00",
+    "duration": "0:30:1",
+    "status": "Requested",
+    "waterOrder": "b17a58a0-feb6-4f47-827e-c9a658737af5"
+}
+
+curl --location --request POST 'http://localhost:8080/order/new' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "startTime":"2021-09-16 11:08:00",
+    "duration":"00:30:01",
+    "waterOrder":"b17a58a0-feb6-4f47-827e-c9a658737af5"
+}'
+
+Response
+As your previous is in progress or requested we can not initiate a new one
+
+
+Cancel an order
+curl --location --request GET 'http://localhost:8080/order/cancel/1877b611-6284-4a8e-beb4-e0f1a0abceeb'
+
+Response
+{
+    "id": "1877b611-6284-4a8e-beb4-e0f1a0abceeb",
+    "startTime": "2021-09-16 11:07:00",
+    "duration": "0:30:1",
+    "status": "Cancel",
+    "waterOrder": "b17a58a0-feb6-4f47-827e-c9a658737af5"
+}
+
+
